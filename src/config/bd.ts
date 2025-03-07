@@ -1,6 +1,6 @@
 //src/config/bd.ts
 import mongoose from 'mongoose';
-
+import colors from 'colors';
 
 export const connectDB = async () => {
 
@@ -12,12 +12,12 @@ export const connectDB = async () => {
 
     try {
         const { connection } = await mongoose.connect(process.env.BD_URI) 
-        const url = `${connection.host}:${connection.port}`
+        const url = `${connection.host}:${connection.port}`        
         console.log(`MongoDB Conectado en ${url}`)
     } catch (error) {
         // Nos aseguramos de que existe error para poder acceder a su propiedad message
         if (error instanceof Error) {
-            console.log('Error al conectar a la base de datos:', error.message);
+            console.log(colors.bgRed.white.bold(`Error al conectar a la base de datos: ${error.message}`));
         } else {
             console.log('Error desconocido al conectar a la base de datos:', error);
         }

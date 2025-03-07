@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 //src/config/bd.ts
 const mongoose_1 = __importDefault(require("mongoose"));
+const colors_1 = __importDefault(require("colors"));
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     // Si no existe la variable de entorno BD_URI, salimos de la aplicación
     if (!process.env.BD_URI) {
@@ -29,7 +30,7 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     catch (error) {
         // Nos aseguramos de que existe error para poder acceder a su propiedad message
         if (error instanceof Error) {
-            console.log('Error al conectar a la base de datos:', error.message);
+            console.log(colors_1.default.bgRed.white.bold(`Error al conectar a la base de datos: ${error.message}`));
         }
         else {
             console.log('Error desconocido al conectar a la base de datos:', error);
