@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = void 0;
+exports.loginUser = exports.createUser = void 0;
 const User_1 = __importDefault(require("../models/User"));
 const express_validator_1 = require("express-validator");
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -33,3 +33,17 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.createUser = createUser;
+const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield User_1.default.findOne({ email: req.body.email });
+    if (!user) {
+        res.status(400).json({ message: 'Usuario no encontrado' });
+    }
+    if (!(user === null || user === void 0 ? void 0 : user.password)) {
+        res.status(400).json({ message: 'Password no encontrado' });
+    }
+    if ((user === null || user === void 0 ? void 0 : user.password) !== req.body.password) {
+        res.status(400).json({ message: 'Contraseña incorrecta' });
+    }
+    res.status(200).json({ message: 'Usuario logueado' });
+});
+exports.loginUser = loginUser;

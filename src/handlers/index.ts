@@ -25,3 +25,24 @@ export const createUser = async (req: Request, res: Response) => {
     }
 
 }
+
+export const loginUser = async (req: Request, res: Response) => {
+
+    
+    const user = await User.findOne({email: req.body.email})
+
+    if (!user) {
+        res.status(400).json({message: 'Usuario no encontrado'})
+    }
+
+    if (!user?.password) {
+        res.status(400).json({message: 'Password no encontrado'})
+    }
+
+    if (user?.password !== req.body.password) {
+        res.status(400).json({message: 'Contraseña incorrecta'})
+    }
+
+    res.status(200).json({message: 'Usuario logueado'})
+
+}
