@@ -17,7 +17,7 @@ router.post('/auth/register',
                 .notEmpty()
                 .withMessage('El handle es obligatorio'),
 
-    body('mame').notEmpty()
+    body('name').notEmpty()
                 .withMessage('El nombre es obligatorio'),   
 
     body('email').isEmail()
@@ -30,7 +30,8 @@ router.post('/auth/register',
     createUser)
 
 router.post('/auth/login',loginUser)    
-    
+
+
     
 
     

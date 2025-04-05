@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 router.post('/auth/register', (0, express_validator_1.body)('handle')
     .notEmpty()
-    .withMessage('El handle es obligatorio'), (0, express_validator_1.body)('mame').notEmpty()
+    .withMessage('El handle es obligatorio'), (0, express_validator_1.body)('name').notEmpty()
     .withMessage('El nombre es obligatorio'), (0, express_validator_1.body)('email').isEmail()
     .withMessage('El email no es correcto'), (0, express_validator_1.body)('password')
     .isLength({ min: 8 })
